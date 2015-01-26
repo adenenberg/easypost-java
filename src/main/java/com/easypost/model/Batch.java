@@ -116,6 +116,24 @@ public class Batch extends EasyPostResource {
 		return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
 	}
 
+	// buy
+	public Batch buy() throws EasyPostException {
+		return this.buy(null, null);
+	}
+
+	public Batch buy(Map<String, Object> params) throws EasyPostException {
+		return this.buy(params, null);
+	}
+
+	public Batch buy(Map<String, Object> params, String apiKey) throws EasyPostException {
+		Batch response = request(
+			RequestMethod.POST,
+			String.format("%s/buy", instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
+
+		this.merge(this, response);
+		return this;
+	}
+	
 	// refresh
 	public Batch refresh() throws EasyPostException {
 		return this.refresh(null, null);
